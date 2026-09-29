@@ -1,0 +1,12 @@
+node_modules/
+package-lock.json
+
+# 데이터셋·실험 산출물은 용량과 라이선스 문제로 올리지 않는다
+dataset/
+results/
+*.mp4
+*.avi
+*.pkl
+
+# Word 임시 파일
+~$*.docx
