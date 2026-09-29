@@ -25,6 +25,40 @@ docs/
   data/                            분석 CSV와 샘플 비교 이미지
 scripts/
   build_docx.js                    논문 docx 생성 스크립트
+src/
+  run_when_where.py                Molmo로 When/Where 예측 (이어하기·분할 실행 지원)
+  evaluate_when_where.py           공식 지표 채점 + 95% CI + 그룹별 + 전체 소요 시간 예측
+  molmo.py, data.py                모델 래퍼, 메타데이터·프레임 추출
+configs/
+  pilot_100.csv                    pilot 영상 100개 (충돌 유형 × 주야 층화, seed 0)
+third_party/ACCIDENT/              공식 저장소 (submodule, commit 38b2297)
+```
+
+## 진행 현황 (2026-09-29)
+
+| 단계 | 상태 |
+|---|---|
+| 선행연구, 논문 초안 | ✅ 초안 완료 (서론 1페이지 원고 병합, 저자 정보 필요) |
+| 데이터 확인 | ✅ test split 실측 분석 완료 ([데이터분석_결과](docs/데이터분석_결과.md)) |
+| 실험 설계 | ✅ 결정 11개 확정 ([실험설계_결정사항](docs/실험설계_결정사항.md)) |
+| 원본 When/Where 코드 | ✅ 작성, mock 검증 완료. **실제 GPU 실행은 아직** |
+| pilot test (원본 100개) | ⏳ 동료 GPU 실행 대기 ([실행가이드](docs/실행가이드_WhenWhere.md)) |
+| 열화 생성 코드 (`degrade.py`) | ⬜ 다음 작업 |
+| What(유형) 분류 코드 | ⬜ |
+| 전체 실험, 분석, 논문 완성 | ⬜ |
+
+**미정**: 실행 GPU 환경(집 PC VRAM 8GB/16GB), pilot 결과에 따른 속도 대책과 압축 강화 여부
+
+## 실험 실행
+
+GPU 환경에서 돌리는 방법은 [docs/실행가이드_WhenWhere.md](docs/실행가이드_WhenWhere.md)에 순서대로 있다. 요약:
+
+```bash
+git clone --recurse-submodules https://github.com/anhanseok/D-G2CAM.git && cd D-G2CAM
+pip install -r requirements.txt            # torch는 CUDA에 맞춰 먼저 설치
+python -m src.run_when_where --dataset-root dataset --video-list configs/pilot_100.csv \
+    --run-name pilot_original --precision bf16
+python -m src.evaluate_when_where --dataset-root dataset --run-name pilot_original
 ```
 
 ## 논문 파일 다시 만들기

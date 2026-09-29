@@ -1,0 +1,22 @@
+# torch / torchvision 은 GPU의 CUDA 버전에 맞춰 먼저 설치한다 (docs/실행가이드_WhenWhere.md 2단계).
+# Colab에는 이미 설치되어 있다.
+
+# 공식 ACCIDENT 코드와 같은 버전 (Molmo 원격 코드가 이 버전에서 동작 확인됨)
+transformers==4.53.2
+accelerate==1.9.0
+tokenizers==0.21.2
+einops>=0.8.1
+
+# 8bit / 4bit 양자화 (VRAM 24GB 미만일 때)
+bitsandbytes>=0.43
+
+# 데이터 처리
+pillow
+opencv-python-headless>=4.9
+numpy>=1.26
+pandas>=2.1
+tqdm
+tabulate
+
+# 데이터셋 다운로드
+kaggle

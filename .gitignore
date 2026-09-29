@@ -10,3 +10,7 @@ results/
 
 # Word 임시 파일
 ~$*.docx
+
+# Python
+__pycache__/
+.venv/

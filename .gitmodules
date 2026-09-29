@@ -1,0 +1,3 @@
+[submodule "third_party/ACCIDENT"]
+	path = third_party/ACCIDENT
+	url = https://github.com/accidentbench/ACCIDENT.git
